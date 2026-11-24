@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vaquinha das Alianças 💍</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --primary: #d97706;
+      --primary-dark: #b45309;
+      --accent: #f59e0b;
+      --bg-dark: #0f172a;
+      --card-bg: #1e293b;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --success: #10b981;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    body {
+      background: radial-gradient(circle at top, #1e293b 0%, #0f172a 100%);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 24px 16px 60px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 680px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    header {
+      text-align: center;
+      padding: 20px 0 10px;
+    }
+
+    .tag {
+      background: rgba(245, 158, 11, 0.15);
+      color: #fbbf24;
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      display: inline-block;
+      margin-bottom: 12px;
+      border: 1px solid rgba(245, 158, 11, 0.3);
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      line-height: 1.2;
+      background: linear-gradient(to right, #f8fafc, #fcd34d);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 10px;
+    }
+
+    p.subtitle {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      line-height: 1.5;
+    }
+
+    /* CARD ESTILO CATARSE */
+    .card {
+      background: rgba(30, 41, 59, 0.8);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      padding: 24px;
+      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+    }
+
+    /* NÍVEL ATUAL / EVOLUÇÃO */
+    .ring-stage {
+      text-align: center;
+      padding: 20px 10px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0) 100%);
+      border-radius: 16px;
+      border: 1px dashed rgba(245, 158, 11, 0.4);
+      margin-bottom: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ring-icon {
+      font-size: 4rem;
+      margin-bottom: 8px;
+      filter: drop-shadow(0 0 16px rgba(245, 158, 11, 0.5));
+      animation: pulse 2.5s infinite ease-in-out;
+      display: inline-block;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.08); }
+    }
+
+    .ring-level-title {
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: #fef08a;
+      margin-bottom: 6px;
+    }
+
+    .ring-desc {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    /* STATS CATARSE */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .stat-box {
+      background: rgba(15, 23, 42, 0.6);
+      padding: 14px 8px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .stat-val {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: #38bdf8;
+    }
+
+    .stat-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    /* BARRA DE PROGRESSO */
+    .progress-container {
+      margin-bottom: 12px;
+    }
+
+    .progress-bar-bg {
+      height: 18px;
+      background: #0f172a;
+      border-radius: 999px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      position: relative;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #f59e0b, #10b981);
+      border-radius: 999px;
+      transition: width 1s ease-in-out;
+      position: relative;
+    }
+
+    .progress-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: 6px;
+      font-weight: 600;
+    }
+
+    /* METAS / STRETCH GOALS */
+    .goals-section {
+      margin-top: 24px;
+    }
+
+    .goals-section h3 {
+      font-size: 1.1rem;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .goals-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .goal-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      background: rgba(15, 23, 42, 0.5);
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      font-size: 0.9rem;
+      transition: all 0.2s ease;
+    }
+
+    .goal-item.achieved {
+      border-color: rgba(16, 185, 129, 0.4);
+      background: rgba(16, 185, 129, 0.08);
+    }
+
+    .goal-item.current {
+      border-color: rgba(245, 158, 11, 0.6);
+      background: rgba(245, 158, 11, 0.1);
+      font-weight: 700;
+    }
+
+    .goal-badge {
+      font-size: 0.75rem;
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-weight: 700;
+    }
+
+    .achieved .goal-badge {
+      background: var(--success);
+      color: #0f172a;
+    }
+
+    .current .goal-badge {
+      background: var(--accent);
+      color: #0f172a;
+    }
+
+    .locked .goal-badge {
+      background: #334155;
+      color: #94a3b8;
+    }
+
+    /* PIX CARD */
+    .pix-card {
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.9));
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      text-align: center;
+      padding: 24px;
+      border-radius: 20px;
+    }
+
+    .pix-title {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: #fcd34d;
+      margin-bottom: 8px;
+    }
+
+    .pix-key-box {
+      background: #0f172a;
+      border: 1px dashed rgba(255, 255, 255, 0.2);
+      padding: 12px;
+      border-radius: 8px;
+      font-family: monospace;
+      font-size: 1rem;
+      color: #38bdf8;
+      margin: 14px 0;
+      word-break: break-all;
+      user-select: all;
+    }
+
+    .btn-copy {
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      border: none;
+      color: #0f172a;
+      font-weight: 800;
+      padding: 12px 24px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 0.95rem;
+      transition: transform 0.15s, opacity 0.15s;
+      width: 100%;
+      max-width: 280px;
+    }
+
+    .btn-copy:hover {
+      opacity: 0.95;
+      transform: translateY(-2px);
+    }
+
+    .btn-copy:active {
+      transform: translateY(0);
+    }
+
+    /* MENSAGENS / RECADOS */
+    .supporters-section {
+      background: rgba(30, 41, 59, 0.6);
+      border-radius: 16px;
+      padding: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .supporters-section h4 {
+      font-size: 1rem;
+      color: #cbd5e1;
+      margin-bottom: 12px;
+    }
+
+    .supporters-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .supporter-pill {
+      background: #0f172a;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      color: #94a3b8;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .supporter-pill span {
+      color: #38bdf8;
+      font-weight: 700;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 0.8rem;
+      color: #64748b;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <div class="tag">PROJETO RUMO AO ALTAR 💍</div>
+      <h1 id="page-title">Vaquinha da Nossa Aliança</h1>
+      <p class="subtitle" id="page-subtitle">Ajude o casal a desbloquear a melhor aliança possível! Quanto mais arrecadamos, mais top ela fica.</p>
+    </header>
+
+    <!-- CARD PRINCIPAL DE PROGRESSO -->
+    <main class="card">
+      <!-- EVOLUÇÃO DA ALIANÇA -->
+      <div class="ring-stage">
+        <div class="ring-icon" id="current-icon">💍</div>
+        <div class="ring-level-title" id="current-level-name">Carregando...</div>
+        <p class="ring-desc" id="current-level-desc">...</p>
+      </div>
+
+      <!-- ESTATÍSTICAS CATARSE -->
+      <div class="stats-grid">
+        <div class="stat-box">
+          <div class="stat-val" id="stat-raised">R$ 0</div>
+          <div class="stat-label">Arrecadados</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-val" id="stat-percent">0%</div>
+          <div class="stat-label">Da Meta Mínima</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-val" id="stat-supporters">0</div>
+          <div class="stat-label">Apoiadores</div>
+        </div>
+      </div>
+
+      <!-- BARRA DE PROGRESSO -->
+      <div class="progress-container">
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill" id="progress-fill" style="width: 0%;"></div>
+        </div>
+        <div class="progress-labels">
+          <span>Meta Mínima: <strong id="min-goal-text">R$ 0</strong></span>
+          <span>Meta Lendária: <strong id="max-goal-text">R$ 0</strong></span>
+        </div>
+      </div>
+
+      <!-- FASES / METAS ESTENDIDAS (STRETCH GOALS) -->
+      <div class="goals-section">
+        <h3>🏆 Níveis de Evolução da Aliança</h3>
+        <div class="goals-list" id="goals-list">
+          <!-- Gerado via JS dinamicamente -->
+        </div>
+      </div>
+    </main>
+
+    <!-- ÁREA DE CONTRIBUIÇÃO (PIX) -->
+    <section class="pix-card">
+      <div class="pix-title">Como Contribuir? 💛</div>
+      <p style="color: var(--text-muted); font-size: 0.95rem;">
+        Você pode enviar qualquer valor pelo Pix! Basta copiar a chave abaixo:
+      </p>
+      <div class="pix-key-box" id="pix-key">sua-chave-pix-aqui@email.com</div>
+      <button class="btn-copy" id="btn-copy" onclick="copyPix()">Copiar Chave Pix</button>
+      <p id="copy-feedback" style="color: #10b981; font-size: 0.85rem; margin-top: 8px; display: none;">Chave copiada com sucesso! ✨</p>
+    </section>
+
+    <!-- LISTA DE APOIADORES (OPCIONAL) -->
+    <section class="supporters-section">
+      <h4>❤️ Últimos Apoiadores</h4>
+      <div class="supporters-list" id="supporters-list">
+        <!-- Gerado via config.js -->
+      </div>
+    </section>
+
+    <footer>
+      Feito com carinho para o nosso grande dia 🤵👰 • Hospedado no GitHub Pages
+    </footer>
+  </div>
+
+  <!-- ARQUIVO DE CONFIGURAÇÃO DIRETO E SIMPLES -->
+  <script src="config.js"></script>
+
+  <script>
+    // Inicialização da tela com base nos dados do config.js
+    function init() {
+      if (!window.VAQUINHA_CONFIG) return;
+      const c = window.VAQUINHA_CONFIG;
+
+      // Textos principais
+      if (c.titulo) document.getElementById('page-title').innerText = c.titulo;
+      if (c.subtitulo) document.getElementById('page-subtitle').innerText = c.subtitulo;
+      if (c.chavePix) document.getElementById('pix-key').innerText = c.chavePix;
+
+      // Stats
+      const total = c.valorArrecadado || 0;
+      const metaMinima = c.niveis[0]?.valor || 1;
+      const metaMaxima = c.niveis[c.niveis.length - 1]?.valor || 1;
+      
+      const percentualMin = Math.round((total / metaMinima) * 100);
+      const percentualTotal = Math.min(100, Math.round((total / metaMaxima) * 100));
+
+      document.getElementById('stat-raised').innerText = `R$ ${total.toLocaleString('pt-BR')}`;
+      document.getElementById('stat-percent').innerText = `${percentualMin}%`;
+      document.getElementById('stat-supporters').innerText = c.apoiadores ? c.apoiadores.length : 0;
+      document.getElementById('progress-fill').style.width = `${percentualTotal}%`;
+      document.getElementById('min-goal-text').innerText = `R$ ${metaMinima.toLocaleString('pt-BR')}`;
+      document.getElementById('max-goal-text').innerText = `R$ ${metaMaxima.toLocaleString('pt-BR')}`;
+
+      // Determinar nível atual
+      let currentLevel = c.niveis[0];
+      for (let i = 0; i < c.niveis.length; i++) {
+        if (total >= c.niveis[i].valor) {
+          currentLevel = c.niveis[i];
+        }
+      }
+
+      document.getElementById('current-icon').innerText = currentLevel.icone;
+      document.getElementById('current-level-name').innerText = `Nível Atual: ${currentLevel.nome}`;
+      document.getElementById('current-level-desc').innerText = currentLevel.descricao;
+
+      // Listar Níveis
+      const listContainer = document.getElementById('goals-list');
+      listContainer.innerHTML = '';
+      
+      c.niveis.forEach(lvl => {
+        const isAchieved = total >= lvl.valor;
+        const isCurrent = currentLevel.nome === lvl.nome;
+        
+        let statusClass = isCurrent ? 'current' : (isAchieved ? 'achieved' : 'locked');
+        let statusBadge = isCurrent ? 'Em Andamento' : (isAchieved ? '✓ Desbloqueado' : 'Bloqueado');
+
+        const item = document.createElement('div');
+        item.className = `goal-item ${statusClass}`;
+        item.innerHTML = `
+          <div>
+            <strong>${lvl.icone} ${lvl.nome}</strong>
+            <span style="display:block; font-size: 0.8rem; color: var(--text-muted);">${lvl.descricao}</span>
+          </div>
+          <div style="text-align: right; min-width: 110px;">
+            <div style="font-weight: 700;">R$ ${lvl.valor.toLocaleString('pt-BR')}</div>
+            <span class="goal-badge">${statusBadge}</span>
+          </div>
+        `;
+        listContainer.appendChild(item);
+      });
+
+      // Apoiadores
+      const supContainer = document.getElementById('supporters-list');
+      supContainer.innerHTML = '';
+      if (c.apoiadores && c.apoiadores.length > 0) {
+        c.apoiadores.forEach(sup => {
+          const pill = document.createElement('div');
+          pill.className = 'supporter-pill';
+          pill.innerHTML = `<span>${sup.nome}</span> ${sup.recado ? `• "${sup.recado}"` : ''}`;
+          supContainer.appendChild(pill);
+        });
+      } else {
+        supContainer.innerHTML = '<span style="color: var(--text-muted); font-size: 0.85rem;">Seja o primeiro a apoiar!</span>';
+      }
+    }
+
+    function copyPix() {
+      const key = document.getElementById('pix-key').innerText;
+      navigator.clipboard.writeText(key).then(() => {
+        const feedback = document.getElementById('copy-feedback');
+        feedback.style.display = 'block';
+        setTimeout(() => feedback.style.display = 'none', 3000);
+      });
+    }
+
+    window.onload = init;
+  </script>
+</body>
+</html>
