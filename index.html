@@ -3,199 +3,377 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Vaquinha das Alianças 💍</title>
+  <title>Cainã &amp; Marília — Vaquinha da Nossa Aliança</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
-  
+  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
   <style>
     :root {
-      --primary: #d97706;
-      --primary-dark: #b45309;
-      --accent: #f59e0b;
-      --bg-dark: #0f172a;
-      --card-bg: #1e293b;
-      --text-main: #f8fafc;
-      --text-muted: #94a3b8;
-      --success: #10b981;
+      /* Paleta inspirada no convite botânico */
+      --paper-bg: #f6f4ee;
+      --paper-card: #fcfbf8;
+      --paper-inset: #f2efe7;
+
+      --olive-deep: #394832;
+      --olive-mid: #536649;
+      --sage: #7a8d6e;
+      --sage-soft: #e7ede3;
+
+      --gold: #b48a4e;
+      --gold-light: #d4b483;
+      --gold-soft: #f5eee2;
+
+      --ink-main: #2b3127;
+      --ink-muted: #62695c;
+      --border-soft: rgba(57, 72, 50, 0.14);
+      --border-gold: rgba(180, 138, 78, 0.36);
+      --shadow-card: 0 18px 45px -24px rgba(43, 49, 39, 0.22), 0 4px 14px -6px rgba(43, 49, 39, 0.08);
     }
 
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
-      background: radial-gradient(circle at top, #1e293b 0%, #0f172a 100%);
-      color: var(--text-main);
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--ink-main);
+      background-color: var(--paper-bg);
+      /* Textura sutil de papel algodão */
+      background-image:
+        radial-gradient(circle at 18% 12%, rgba(122, 141, 110, 0.09) 0%, transparent 45%),
+        radial-gradient(circle at 85% 88%, rgba(180, 138, 78, 0.09) 0%, transparent 45%),
+        repeating-linear-gradient(
+          0deg,
+          rgba(57, 72, 50, 0.012) 0px,
+          rgba(57, 72, 50, 0.012) 1px,
+          transparent 1px,
+          transparent 4px
+        );
       min-height: 100vh;
       display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 24px 16px 60px;
+      justify-content: center;
+      padding: 28px 16px 56px;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
     }
 
-    .container {
+    /* Folha principal estilo convite */
+    .invitation-sheet {
+      position: relative;
       width: 100%;
-      max-width: 680px;
+      max-width: 720px;
+      background: var(--paper-card);
+      border-radius: 24px;
+      border: 1px solid var(--border-soft);
+      box-shadow: var(--shadow-card);
+      overflow: hidden;
+      padding: 150px 36px 130px;
+      display: flex;
+      flex-direction: column;
+      gap: 26px;
+    }
+
+    /* Moldura interna delicada */
+    .invitation-sheet::before {
+      content: "";
+      position: absolute;
+      inset: 14px;
+      border: 1px solid rgba(180, 138, 78, 0.25);
+      border-radius: 16px;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Folhagens botânicas no topo e na base */
+    .botanical-top,
+    .botanical-bottom {
+      position: absolute;
+      left: 0;
+      width: 100%;
+      pointer-events: none;
+      z-index: 2;
+      user-select: none;
+    }
+
+    .botanical-top {
+      top: 0;
+      height: auto;
+      max-height: 195px;
+    }
+
+    .botanical-bottom {
+      bottom: 0;
+      height: auto;
+      max-height: 165px;
+    }
+
+    .content-layer {
+      position: relative;
+      z-index: 3;
       display: flex;
       flex-direction: column;
       gap: 24px;
     }
 
+    /* CABEÇALHO ESTILO CONVITE */
     header {
       text-align: center;
-      padding: 20px 0 10px;
+      padding-top: 6px;
     }
 
-    .tag {
-      background: rgba(245, 158, 11, 0.15);
-      color: #fbbf24;
-      padding: 6px 14px;
-      border-radius: 999px;
-      font-size: 0.85rem;
-      font-weight: 700;
+    .couple-names {
+      font-family: 'Alex Brush', cursive;
+      font-size: clamp(2.85rem, 8vw, 4.1rem);
+      font-weight: 400;
+      color: var(--olive-deep);
+      line-height: 1.08;
+      margin-bottom: 10px;
       letter-spacing: 0.5px;
-      display: inline-block;
+    }
+
+    .event-kicker {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--olive-mid);
+      margin-bottom: 18px;
+    }
+
+    .quote-banner {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-style: italic;
+      font-size: 1.18rem;
+      color: var(--ink-main);
+      max-width: 490px;
+      margin: 0 auto 22px;
+      line-height: 1.45;
+    }
+
+    .divider-ornament {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin: 0 auto 20px;
+      max-width: 280px;
+    }
+
+    .divider-ornament::before,
+    .divider-ornament::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold-light), transparent);
+    }
+
+    .divider-diamond {
+      width: 7px;
+      height: 7px;
+      background: var(--gold);
+      transform: rotate(45deg);
+      opacity: 0.85;
+    }
+
+    .campaign-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 14px;
+      border-radius: 999px;
+      background: var(--gold-soft);
+      border: 1px solid var(--border-gold);
+      color: #8b6630;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
       margin-bottom: 12px;
-      border: 1px solid rgba(245, 158, 11, 0.3);
     }
 
     h1 {
-      font-size: 2.2rem;
-      font-weight: 800;
-      line-height: 1.2;
-      background: linear-gradient(to right, #f8fafc, #fcd34d);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(1.75rem, 4.5vw, 2.3rem);
+      font-weight: 700;
+      color: var(--olive-deep);
+      line-height: 1.18;
       margin-bottom: 10px;
     }
 
-    p.subtitle {
-      color: var(--text-muted);
-      font-size: 1.05rem;
-      line-height: 1.5;
-    }
-
-    /* CARD ESTILO CATARSE */
-    .card {
-      background: rgba(30, 41, 59, 0.8);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 20px;
-      padding: 24px;
-      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
-    }
-
-    /* NÍVEL ATUAL / EVOLUÇÃO */
-    .ring-stage {
-      text-align: center;
-      padding: 20px 10px;
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0) 100%);
-      border-radius: 16px;
-      border: 1px dashed rgba(245, 158, 11, 0.4);
-      margin-bottom: 20px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .ring-icon {
-      font-size: 4rem;
-      margin-bottom: 8px;
-      filter: drop-shadow(0 0 16px rgba(245, 158, 11, 0.5));
-      animation: pulse 2.5s infinite ease-in-out;
-      display: inline-block;
-    }
-
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.08); }
-    }
-
-    .ring-level-title {
-      font-size: 1.3rem;
-      font-weight: 800;
-      color: #fef08a;
-      margin-bottom: 6px;
-    }
-
-    .ring-desc {
-      font-size: 0.95rem;
-      color: var(--text-muted);
-      max-width: 480px;
+    .subtitle {
+      color: var(--ink-muted);
+      font-size: 0.98rem;
+      max-width: 540px;
       margin: 0 auto;
     }
 
-    /* STATS CATARSE */
+    /* CARTÕES INTERNOS */
+    .section-card {
+      background: #ffffff;
+      border: 1px solid var(--border-soft);
+      border-radius: 18px;
+      padding: 24px;
+      box-shadow: 0 4px 18px -12px rgba(43, 49, 39, 0.14);
+    }
+
+    /* ESTÁGIO DA ALIANÇA */
+    .ring-stage {
+      text-align: center;
+      padding: 24px 18px;
+      border-radius: 14px;
+      background: linear-gradient(180deg, var(--paper-inset) 0%, #ffffff 100%);
+      border: 1px solid var(--border-gold);
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    .ring-stage::after {
+      content: "";
+      position: absolute;
+      inset: 5px;
+      border: 1px dashed rgba(180, 138, 78, 0.28);
+      border-radius: 10px;
+      pointer-events: none;
+    }
+
+    .ring-icon {
+      font-size: 3.3rem;
+      line-height: 1;
+      margin-bottom: 10px;
+      display: inline-block;
+      filter: drop-shadow(0 6px 12px rgba(180, 138, 78, 0.25));
+      animation: gentleFloat 3.4s ease-in-out infinite;
+    }
+
+    @keyframes gentleFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-4px); }
+    }
+
+    .ring-status-pill {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--olive-deep);
+      background: var(--sage-soft);
+      padding: 4px 12px;
+      border-radius: 999px;
+      margin-bottom: 8px;
+    }
+
+    .ring-level-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.55rem;
+      font-weight: 700;
+      color: var(--olive-deep);
+      margin-bottom: 6px;
+      line-height: 1.2;
+    }
+
+    .ring-desc {
+      font-size: 0.93rem;
+      color: var(--ink-muted);
+      max-width: 470px;
+      margin: 0 auto;
+    }
+
+    .next-goal-hint {
+      margin-top: 12px;
+      font-size: 0.84rem;
+      font-weight: 600;
+      color: #8b6630;
+    }
+
+    /* ESTATÍSTICAS */
     .stats-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 12px;
       margin-bottom: 20px;
-      text-align: center;
     }
 
     .stat-box {
-      background: rgba(15, 23, 42, 0.6);
-      padding: 14px 8px;
+      background: var(--paper-inset);
+      border: 1px solid rgba(57, 72, 50, 0.08);
       border-radius: 12px;
-      border: 1px solid rgba(255, 255, 255, 0.05);
+      padding: 14px 10px;
+      text-align: center;
     }
 
     .stat-val {
-      font-size: 1.35rem;
-      font-weight: 800;
-      color: #38bdf8;
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.65rem;
+      font-weight: 700;
+      color: var(--olive-deep);
+      line-height: 1.1;
     }
 
     .stat-label {
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       text-transform: uppercase;
-      font-weight: 700;
-      color: var(--text-muted);
-      margin-top: 4px;
+      letter-spacing: 0.07em;
+      font-weight: 600;
+      color: var(--ink-muted);
+      margin-top: 5px;
     }
 
     /* BARRA DE PROGRESSO */
     .progress-container {
-      margin-bottom: 12px;
+      margin-bottom: 6px;
     }
 
     .progress-bar-bg {
-      height: 18px;
-      background: #0f172a;
+      height: 14px;
+      background: var(--paper-inset);
       border-radius: 999px;
       overflow: hidden;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      position: relative;
+      border: 1px solid rgba(57, 72, 50, 0.14);
     }
 
     .progress-bar-fill {
       height: 100%;
-      background: linear-gradient(90deg, #f59e0b, #10b981);
+      width: 0%;
+      background: linear-gradient(90deg, var(--gold) 0%, var(--sage) 60%, var(--olive-deep) 100%);
       border-radius: 999px;
-      transition: width 1s ease-in-out;
-      position: relative;
+      transition: width 0.9s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
     .progress-labels {
       display: flex;
       justify-content: space-between;
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      margin-top: 6px;
-      font-weight: 600;
+      gap: 8px;
+      flex-wrap: wrap;
+      font-size: 0.82rem;
+      color: var(--ink-muted);
+      margin-top: 8px;
     }
 
-    /* METAS / STRETCH GOALS */
+    .progress-labels strong {
+      color: var(--olive-deep);
+    }
+
+    /* METAS ESTENDIDAS */
     .goals-section {
       margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border-soft);
     }
 
-    .goals-section h3 {
-      font-size: 1.1rem;
+    .section-heading {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--olive-deep);
       margin-bottom: 14px;
       display: flex;
       align-items: center;
@@ -212,311 +390,613 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 12px 16px;
-      background: rgba(15, 23, 42, 0.5);
-      border-radius: 10px;
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      font-size: 0.9rem;
-      transition: all 0.2s ease;
+      gap: 14px;
+      padding: 14px 16px;
+      border-radius: 12px;
+      border: 1px solid var(--border-soft);
+      background: var(--paper-card);
+      transition: border-color 0.2s ease, background-color 0.2s ease;
     }
 
     .goal-item.achieved {
-      border-color: rgba(16, 185, 129, 0.4);
-      background: rgba(16, 185, 129, 0.08);
+      background: var(--sage-soft);
+      border-color: rgba(57, 72, 50, 0.28);
     }
 
     .goal-item.current {
-      border-color: rgba(245, 158, 11, 0.6);
-      background: rgba(245, 158, 11, 0.1);
+      background: var(--gold-soft);
+      border-color: var(--gold);
+    }
+
+    .goal-item.locked {
+      opacity: 0.85;
+    }
+
+    .goal-info-title {
       font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--ink-main);
+    }
+
+    .goal-info-desc {
+      display: block;
+      font-size: 0.82rem;
+      color: var(--ink-muted);
+      margin-top: 2px;
+    }
+
+    .goal-meta {
+      text-align: right;
+      flex-shrink: 0;
+    }
+
+    .goal-value {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--olive-deep);
+      margin-bottom: 4px;
     }
 
     .goal-badge {
-      font-size: 0.75rem;
-      padding: 4px 8px;
-      border-radius: 6px;
+      display: inline-block;
+      font-size: 0.72rem;
       font-weight: 700;
+      padding: 3px 9px;
+      border-radius: 999px;
+      letter-spacing: 0.03em;
     }
 
     .achieved .goal-badge {
-      background: var(--success);
-      color: #0f172a;
+      background: var(--olive-deep);
+      color: #ffffff;
     }
 
     .current .goal-badge {
-      background: var(--accent);
-      color: #0f172a;
+      background: var(--gold);
+      color: #ffffff;
     }
 
     .locked .goal-badge {
-      background: #334155;
-      color: #94a3b8;
+      background: #e6e2d8;
+      color: var(--ink-muted);
     }
 
-    /* PIX CARD */
+    /* CARTÃO PIX */
     .pix-card {
-      background: linear-gradient(135deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.9));
-      border: 1px solid rgba(245, 158, 11, 0.3);
+      background: linear-gradient(180deg, #ffffff 0%, var(--gold-soft) 100%);
+      border: 1px solid var(--border-gold);
+      border-radius: 18px;
+      padding: 26px 24px;
       text-align: center;
-      padding: 24px;
-      border-radius: 20px;
     }
 
     .pix-title {
-      font-size: 1.2rem;
-      font-weight: 800;
-      color: #fcd34d;
-      margin-bottom: 8px;
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.55rem;
+      font-weight: 700;
+      color: var(--olive-deep);
+      margin-bottom: 6px;
+    }
+
+    .pix-subtitle {
+      color: var(--ink-muted);
+      font-size: 0.92rem;
+      max-width: 460px;
+      margin: 0 auto;
     }
 
     .pix-key-box {
-      background: #0f172a;
-      border: 1px dashed rgba(255, 255, 255, 0.2);
-      padding: 12px;
-      border-radius: 8px;
-      font-family: monospace;
-      font-size: 1rem;
-      color: #38bdf8;
-      margin: 14px 0;
+      background: #ffffff;
+      border: 1px dashed var(--gold);
+      padding: 13px 16px;
+      border-radius: 10px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.98rem;
+      color: var(--olive-deep);
+      font-weight: 600;
+      margin: 16px auto;
+      max-width: 440px;
       word-break: break-all;
       user-select: all;
     }
 
     .btn-copy {
-      background: linear-gradient(135deg, #f59e0b, #d97706);
-      border: none;
-      color: #0f172a;
-      font-weight: 800;
-      padding: 12px 24px;
-      border-radius: 10px;
+      background: var(--olive-deep);
+      color: #fcfbf8;
+      border: 1px solid var(--olive-deep);
+      font-weight: 600;
+      font-size: 0.94rem;
+      padding: 12px 26px;
+      border-radius: 999px;
       cursor: pointer;
-      font-size: 0.95rem;
-      transition: transform 0.15s, opacity 0.15s;
-      width: 100%;
-      max-width: 280px;
+      transition: background-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+      box-shadow: 0 6px 16px -8px rgba(57, 72, 50, 0.55);
+      min-width: 220px;
     }
 
     .btn-copy:hover {
-      opacity: 0.95;
-      transform: translateY(-2px);
+      background: #2c3826;
+      transform: translateY(-1px);
     }
 
     .btn-copy:active {
       transform: translateY(0);
     }
 
-    /* MENSAGENS / RECADOS */
-    .supporters-section {
-      background: rgba(30, 41, 59, 0.6);
-      border-radius: 16px;
-      padding: 20px;
-      border: 1px solid rgba(255, 255, 255, 0.05);
+    .btn-copy:focus-visible {
+      outline: 3px solid var(--gold);
+      outline-offset: 2px;
     }
 
-    .supporters-section h4 {
-      font-size: 1rem;
-      color: #cbd5e1;
-      margin-bottom: 12px;
+    .copy-feedback {
+      min-height: 22px;
+      margin-top: 10px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--olive-mid);
+    }
+
+    /* MURAL DE APOIADORES */
+    .supporters-section {
+      background: var(--paper-inset);
+      border: 1px solid var(--border-soft);
+      border-radius: 18px;
+      padding: 22px 24px;
     }
 
     .supporters-list {
       display: flex;
       flex-wrap: wrap;
-      gap: 8px;
+      gap: 10px;
     }
 
     .supporter-pill {
-      background: #0f172a;
-      padding: 6px 12px;
-      border-radius: 20px;
-      font-size: 0.85rem;
-      color: #94a3b8;
-      border: 1px solid rgba(255, 255, 255, 0.05);
+      background: #ffffff;
+      border: 1px solid var(--border-soft);
+      border-radius: 12px;
+      padding: 9px 14px;
+      font-size: 0.86rem;
+      color: var(--ink-muted);
+      box-shadow: 0 2px 6px -4px rgba(43, 49, 39, 0.15);
     }
 
-    .supporter-pill span {
-      color: #38bdf8;
+    .supporter-name {
+      color: var(--olive-deep);
       font-weight: 700;
     }
 
+    .supporter-message {
+      font-style: italic;
+    }
+
+    /* RODAPÉ DO CONVITE */
     footer {
       text-align: center;
-      font-size: 0.8rem;
-      color: #64748b;
-      margin-top: 20px;
+      padding-top: 8px;
+      color: var(--ink-muted);
+      font-size: 0.84rem;
+    }
+
+    .event-details-footer {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.05rem;
+      color: var(--olive-deep);
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .event-location {
+      font-size: 0.84rem;
+      color: var(--ink-muted);
+      margin-bottom: 10px;
+    }
+
+    @media (max-width: 560px) {
+      .invitation-sheet {
+        padding: 120px 20px 108px;
+        border-radius: 18px;
+      }
+
+      .invitation-sheet::before {
+        inset: 10px;
+        border-radius: 12px;
+      }
+
+      .section-card,
+      .pix-card,
+      .supporters-section {
+        padding: 18px 16px;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+
+      .stat-box {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 14px;
+      }
+
+      .stat-label {
+        margin-top: 0;
+      }
+
+      .goal-item {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .goal-meta {
+        text-align: left;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .goal-value {
+        margin-bottom: 0;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .ring-icon {
+        animation: none;
+      }
+      .progress-bar-fill,
+      .btn-copy,
+      .goal-item {
+        transition: none;
+      }
     }
   </style>
 </head>
 <body>
 
-  <div class="container">
-    <header>
-      <div class="tag">PROJETO RUMO AO ALTAR 💍</div>
-      <h1 id="page-title">Vaquinha da Nossa Aliança</h1>
-      <p class="subtitle" id="page-subtitle">Ajude o casal a desbloquear a melhor aliança possível! Quanto mais arrecadamos, mais top ela fica.</p>
-    </header>
+  <div class="invitation-sheet">
+    <!-- ORNAMENTO BOTÂNICO SUPERIOR (Aquarela eucalipto + ramos dourados) -->
+    <svg class="botanical-top" viewBox="0 0 720 190" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <!-- Raminhos dourados finos -->
+      <g stroke="#B48A4E" stroke-width="1.35" stroke-linecap="round" opacity="0.65">
+        <path d="M22 162 C 35 120, 62 72, 118 28" />
+        <path d="M46 112 C 26 98, 18 82, 24 64 C 42 74, 48 94, 46 112 Z" fill="rgba(180,138,78,0.08)" />
+        <path d="M68 82 C 86 78, 102 68, 112 52 C 94 52, 78 64, 68 82 Z" fill="rgba(180,138,78,0.08)" />
+        <path d="M695 92 C 640 58, 575 34, 495 16" />
+        <path d="M645 64 C 668 56, 682 42, 692 26 C 670 30, 654 44, 645 64 Z" fill="rgba(180,138,78,0.08)" />
+        <path d="M585 40 C 600 22, 618 14, 634 12 C 618 26, 602 36, 585 40 Z" fill="rgba(180,138,78,0.08)" />
+      </g>
 
-    <!-- CARD PRINCIPAL DE PROGRESSO -->
-    <main class="card">
-      <!-- EVOLUÇÃO DA ALIANÇA -->
-      <div class="ring-stage">
-        <div class="ring-icon" id="current-icon">💍</div>
-        <div class="ring-level-title" id="current-level-name">Carregando...</div>
-        <p class="ring-desc" id="current-level-desc">...</p>
-      </div>
+      <!-- Folhas de oliveira / eucalipto à esquerda -->
+      <g>
+        <path d="M-8 10 C 48 16, 125 42, 196 92" stroke="#536649" stroke-width="1.6" stroke-linecap="round" opacity="0.55" />
+        <path d="M36 16 C 65 4, 98 14, 106 38 C 76 48, 48 38, 36 16 Z" fill="#8A9E7C" opacity="0.72" />
+        <path d="M88 32 C 118 18, 154 24, 168 48 C 140 62, 106 54, 88 32 Z" fill="#5D7052" opacity="0.82" />
+        <path d="M126 52 C 154 42, 186 50, 200 72 C 172 84, 142 74, 126 52 Z" fill="#A5B698" opacity="0.78" />
+        <path d="M16 42 C 42 46, 64 68, 60 94 C 34 86, 18 66, 16 42 Z" fill="#6F8263" opacity="0.74" />
+        <path d="M68 58 C 94 64, 114 88, 106 116 C 78 106, 64 84, 68 58 Z" fill="#46573E" opacity="0.82" />
+        <path d="M114 78 C 138 92, 146 118, 132 140 C 108 124, 104 98, 114 78 Z" fill="#90A481" opacity="0.72" />
+        <path d="M156 84 C 178 96, 192 116, 184 138 C 162 126, 152 104, 156 84 Z" fill="#B6C3AA" opacity="0.68" />
+        <!-- Folhas brancas translúcidas de destaque -->
+        <path d="M214 58 C 234 72, 244 96, 234 118 C 212 104, 206 80, 214 58 Z" fill="#D9DDD6" opacity="0.82" />
+      </g>
 
-      <!-- ESTATÍSTICAS CATARSE -->
-      <div class="stats-grid">
-        <div class="stat-box">
-          <div class="stat-val" id="stat-raised">R$ 0</div>
-          <div class="stat-label">Arrecadados</div>
+      <!-- Folhas centrais e direita (eucalipto arredondado) -->
+      <g>
+        <path d="M245 -4 C 325 18, 415 36, 515 44" stroke="#4D5F46" stroke-width="1.4" stroke-linecap="round" opacity="0.48" />
+        <ellipse cx="272" cy="24" rx="26" ry="15" transform="rotate(-18 272 24)" fill="#7F9274" opacity="0.74" />
+        <ellipse cx="322" cy="34" rx="24" ry="14" transform="rotate(14 322 34)" fill="#4D5E45" opacity="0.8" />
+        <ellipse cx="378" cy="24" rx="22" ry="13" transform="rotate(-12 378 24)" fill="#A4B29D" opacity="0.72" />
+        <ellipse cx="430" cy="42" rx="25" ry="15" transform="rotate(20 430 42)" fill="#6E8068" opacity="0.78" />
+        <circle cx="486" cy="56" r="19" fill="#5B6B58" opacity="0.75" />
+        <circle cx="536" cy="48" r="17" fill="#8B9986" opacity="0.72" />
+        <circle cx="566" cy="74" r="15" fill="#465444" opacity="0.78" />
+        <circle cx="614" cy="64" r="13" fill="#A9B3A5" opacity="0.65" />
+        <ellipse cx="456" cy="86" rx="18" ry="12" transform="rotate(-24 456 86)" fill="#9AA895" opacity="0.68" />
+      </g>
+    </svg>
+
+    <div class="content-layer">
+      <header>
+        <div class="couple-names" id="couple-names">Cainã &amp; Marília</div>
+        <div class="event-kicker" id="event-kicker">Casamento Civil &bull; 20 de Janeiro de 2027</div>
+
+        <p class="quote-banner">
+          &ldquo;O amor não consiste em olhar um para o outro, mas em olhar juntos na mesma direção.&rdquo;
+        </p>
+
+        <div class="divider-ornament" aria-hidden="true">
+          <span class="divider-diamond"></span>
         </div>
-        <div class="stat-box">
-          <div class="stat-val" id="stat-percent">0%</div>
-          <div class="stat-label">Da Meta Mínima</div>
-        </div>
-        <div class="stat-box">
-          <div class="stat-val" id="stat-supporters">0</div>
-          <div class="stat-label">Apoiadores</div>
-        </div>
-      </div>
 
-      <!-- BARRA DE PROGRESSO -->
-      <div class="progress-container">
-        <div class="progress-bar-bg">
-          <div class="progress-bar-fill" id="progress-fill" style="width: 0%;"></div>
+        <div class="campaign-tag">Projeto Rumo ao Altar</div>
+        <h1 id="page-title">Vaquinha da Nossa Aliança</h1>
+        <p class="subtitle" id="page-subtitle">
+          Ajude-nos a desbloquear a melhor aliança para o nosso casamento! Cada contribuição melhora a qualidade da joia.
+        </p>
+      </header>
+
+      <!-- CARD PRINCIPAL DE PROGRESSO -->
+      <main class="section-card">
+        <div class="ring-stage">
+          <div class="ring-icon" id="current-icon" aria-hidden="true">💍</div>
+          <div><span class="ring-status-pill" id="current-stage-pill">Jornada da Aliança</span></div>
+          <div class="ring-level-title" id="current-level-name">Carregando...</div>
+          <p class="ring-desc" id="current-level-desc">...</p>
+          <p class="next-goal-hint" id="next-goal-hint"></p>
         </div>
-        <div class="progress-labels">
-          <span>Meta Mínima: <strong id="min-goal-text">R$ 0</strong></span>
-          <span>Meta Lendária: <strong id="max-goal-text">R$ 0</strong></span>
+
+        <div class="stats-grid">
+          <div class="stat-box">
+            <div class="stat-val" id="stat-raised">R$ 0</div>
+            <div class="stat-label">Arrecadados</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-val" id="stat-percent">0%</div>
+            <div class="stat-label">Da Meta Mínima</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-val" id="stat-supporters">0</div>
+            <div class="stat-label">Apoiadores</div>
+          </div>
         </div>
-      </div>
 
-      <!-- FASES / METAS ESTENDIDAS (STRETCH GOALS) -->
-      <div class="goals-section">
-        <h3>🏆 Níveis de Evolução da Aliança</h3>
-        <div class="goals-list" id="goals-list">
-          <!-- Gerado via JS dinamicamente -->
+        <div class="progress-container">
+          <div
+            class="progress-bar-bg"
+            id="progress-bar"
+            role="progressbar"
+            aria-label="Progresso da vaquinha até a meta máxima"
+            aria-valuemin="0"
+            aria-valuemax="100"
+            aria-valuenow="0"
+          >
+            <div class="progress-bar-fill" id="progress-fill"></div>
+          </div>
+          <div class="progress-labels">
+            <span>Meta Mínima: <strong id="min-goal-text">R$ 0</strong></span>
+            <span>Meta dos Sonhos: <strong id="max-goal-text">R$ 0</strong></span>
+          </div>
         </div>
-      </div>
-    </main>
 
-    <!-- ÁREA DE CONTRIBUIÇÃO (PIX) -->
-    <section class="pix-card">
-      <div class="pix-title">Como Contribuir? 💛</div>
-      <p style="color: var(--text-muted); font-size: 0.95rem;">
-        Você pode enviar qualquer valor pelo Pix! Basta copiar a chave abaixo:
-      </p>
-      <div class="pix-key-box" id="pix-key">sua-chave-pix-aqui@email.com</div>
-      <button class="btn-copy" id="btn-copy" onclick="copyPix()">Copiar Chave Pix</button>
-      <p id="copy-feedback" style="color: #10b981; font-size: 0.85rem; margin-top: 8px; display: none;">Chave copiada com sucesso! ✨</p>
-    </section>
+        <div class="goals-section">
+          <h2 class="section-heading">Níveis de Evolução da Aliança</h2>
+          <div class="goals-list" id="goals-list">
+            <!-- Preenchido via config.js -->
+          </div>
+        </div>
+      </main>
 
-    <!-- LISTA DE APOIADORES (OPCIONAL) -->
-    <section class="supporters-section">
-      <h4>❤️ Últimos Apoiadores</h4>
-      <div class="supporters-list" id="supporters-list">
-        <!-- Gerado via config.js -->
-      </div>
-    </section>
+      <!-- ÁREA DE CONTRIBUIÇÃO (PIX) -->
+      <section class="pix-card" aria-labelledby="pix-heading">
+        <h2 class="pix-title" id="pix-heading">Como Contribuir via Pix</h2>
+        <p class="pix-subtitle">
+          Qualquer valor faz diferença nessa conquista! Basta copiar a nossa chave Pix abaixo e enviar pelo app do seu banco:
+        </p>
+        <div class="pix-key-box" id="pix-key">cainaemarilia@gmail.com</div>
+        <button type="button" class="btn-copy" id="btn-copy">Copiar Chave Pix</button>
+        <p class="copy-feedback" id="copy-feedback" role="status" aria-live="polite"></p>
+      </section>
 
-    <footer>
-      Feito com carinho para o nosso grande dia 🤵👰 • Hospedado no GitHub Pages
-    </footer>
+      <!-- LISTA DE APOIADORES -->
+      <section class="supporters-section" aria-labelledby="supporters-heading">
+        <h2 class="section-heading" id="supporters-heading">Mural de Carinho &amp; Apoiadores</h2>
+        <div class="supporters-list" id="supporters-list">
+          <!-- Preenchido via config.js -->
+        </div>
+      </section>
+
+      <footer>
+        <div class="event-details-footer">20 de Janeiro de 2027 &bull; Quarta-feira às 14:00h</div>
+        <div class="event-location">Cartório da Penha &mdash; Av. Beira Mar, 419 &bull; Ribeira, Salvador</div>
+        <div>Feito com carinho para o nosso grande dia</div>
+      </footer>
+    </div>
+
+    <!-- ORNAMENTO BOTÂNICO INFERIOR -->
+    <svg class="botanical-bottom" viewBox="0 0 720 155" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <!-- Raminhos dourados inferiores à esquerda -->
+      <g stroke="#B48A4E" stroke-width="1.35" stroke-linecap="round" opacity="0.7">
+        <path d="M18 148 C 72 128, 128 112, 186 78" />
+        <path d="M98 118 C 102 96, 114 82, 128 74 C 124 94, 114 110, 98 118 Z" fill="rgba(180,138,78,0.09)" />
+        <path d="M148 98 C 166 96, 184 86, 194 70 C 174 72, 158 84, 148 98 Z" fill="rgba(180,138,78,0.09)" />
+        <path d="M126 126 C 148 128, 166 120, 178 106 C 158 106, 140 114, 126 126 Z" fill="rgba(180,138,78,0.09)" />
+      </g>
+
+      <!-- Folhagens inferiores à direita -->
+      <g>
+        <path d="M468 152 C 550 132, 622 92, 692 22" stroke="#536649" stroke-width="1.5" stroke-linecap="round" opacity="0.52" />
+        <path d="M620 112 C 638 78, 672 56, 706 50 C 696 86, 662 108, 620 112 Z" fill="#8A9E7C" opacity="0.75" />
+        <path d="M558 134 C 584 108, 622 100, 654 110 C 626 138, 592 146, 558 134 Z" fill="#5D7052" opacity="0.8" />
+        <path d="M502 144 C 516 122, 540 112, 566 116 C 550 138, 526 148, 502 144 Z" fill="#A5B698" opacity="0.75" />
+        <ellipse cx="642" cy="36" rx="10" ry="18" transform="rotate(-18 642 36)" fill="#6E8068" opacity="0.74" />
+        <ellipse cx="668" cy="54" rx="9" ry="16" transform="rotate(24 668 54)" fill="#8B9986" opacity="0.7" />
+        <ellipse cx="444" cy="128" rx="11" ry="20" transform="rotate(-32 444 128)" fill="#B4BCC2" opacity="0.65" />
+        <ellipse cx="388" cy="138" rx="10" ry="18" transform="rotate(28 388 138)" fill="#9BA996" opacity="0.6" />
+      </g>
+    </svg>
   </div>
 
-  <!-- ARQUIVO DE CONFIGURAÇÃO DIRETO E SIMPLES -->
+  <!-- ARQUIVO DE CONFIGURAÇÃO -->
   <script src="config.js"></script>
 
   <script>
-    // Inicialização da tela com base nos dados do config.js
+    function formatCurrency(value) {
+      return `R$ ${Number(value || 0).toLocaleString('pt-BR')}`;
+    }
+
     function init() {
       if (!window.VAQUINHA_CONFIG) return;
       const c = window.VAQUINHA_CONFIG;
+      const levels = Array.isArray(c.niveis) ? c.niveis : [];
 
-      // Textos principais
-      if (c.titulo) document.getElementById('page-title').innerText = c.titulo;
-      if (c.subtitulo) document.getElementById('page-subtitle').innerText = c.subtitulo;
-      if (c.chavePix) document.getElementById('pix-key').innerText = c.chavePix;
+      if (c.titulo) document.getElementById('page-title').textContent = c.titulo;
+      if (c.subtitulo) document.getElementById('page-subtitle').textContent = c.subtitulo;
+      if (c.chavePix) document.getElementById('pix-key').textContent = c.chavePix;
+      if (c.casal) document.getElementById('couple-names').textContent = c.casal;
+      if (c.evento) document.getElementById('event-kicker').textContent = c.evento;
 
-      // Stats
-      const total = c.valorArrecadado || 0;
-      const metaMinima = c.niveis[0]?.valor || 1;
-      const metaMaxima = c.niveis[c.niveis.length - 1]?.valor || 1;
-      
-      const percentualMin = Math.round((total / metaMinima) * 100);
-      const percentualTotal = Math.min(100, Math.round((total / metaMaxima) * 100));
+      const total = Number(c.valorArrecadado) || 0;
+      const minGoal = levels[0]?.valor || 1;
+      const maxGoal = levels[levels.length - 1]?.valor || 1;
 
-      document.getElementById('stat-raised').innerText = `R$ ${total.toLocaleString('pt-BR')}`;
-      document.getElementById('stat-percent').innerText = `${percentualMin}%`;
-      document.getElementById('stat-supporters').innerText = c.apoiadores ? c.apoiadores.length : 0;
-      document.getElementById('progress-fill').style.width = `${percentualTotal}%`;
-      document.getElementById('min-goal-text').innerText = `R$ ${metaMinima.toLocaleString('pt-BR')}`;
-      document.getElementById('max-goal-text').innerText = `R$ ${metaMaxima.toLocaleString('pt-BR')}`;
+      const percentMin = Math.round((total / minGoal) * 100);
+      const percentTotal = Math.min(100, Math.max(0, Math.round((total / maxGoal) * 100)));
 
-      // Determinar nível atual
-      let currentLevel = c.niveis[0];
-      for (let i = 0; i < c.niveis.length; i++) {
-        if (total >= c.niveis[i].valor) {
-          currentLevel = c.niveis[i];
+      document.getElementById('stat-raised').textContent = formatCurrency(total);
+      document.getElementById('stat-percent').textContent = `${percentMin}%`;
+      document.getElementById('stat-supporters').textContent = Array.isArray(c.apoiadores) ? c.apoiadores.length : 0;
+
+      const progressBar = document.getElementById('progress-bar');
+      progressBar.setAttribute('aria-valuenow', String(percentTotal));
+      document.getElementById('progress-fill').style.width = `${percentTotal}%`;
+      document.getElementById('min-goal-text').textContent = formatCurrency(minGoal);
+      document.getElementById('max-goal-text').textContent = formatCurrency(maxGoal);
+
+      // Descobrir último nível alcançado e próximo objetivo
+      let achievedIndex = -1;
+      for (let i = 0; i < levels.length; i++) {
+        if (total >= levels[i].valor) {
+          achievedIndex = i;
         }
       }
 
-      document.getElementById('current-icon').innerText = currentLevel.icone;
-      document.getElementById('current-level-name').innerText = `Nível Atual: ${currentLevel.nome}`;
-      document.getElementById('current-level-desc').innerText = currentLevel.descricao;
+      const stagePillEl = document.getElementById('current-stage-pill');
+      const iconEl = document.getElementById('current-icon');
+      const levelNameEl = document.getElementById('current-level-name');
+      const levelDescEl = document.getElementById('current-level-desc');
+      const nextHintEl = document.getElementById('next-goal-hint');
 
-      // Listar Níveis
+      if (levels.length > 0) {
+        if (achievedIndex === -1) {
+          const firstGoal = levels[0];
+          const remaining = Math.max(0, firstGoal.valor - total);
+          iconEl.textContent = firstGoal.icone || '💍';
+          stagePillEl.textContent = '1ª Meta em Andamento';
+          levelNameEl.textContent = `Rumo à ${firstGoal.nome}`;
+          levelDescEl.textContent = firstGoal.descricao || '';
+          nextHintEl.textContent = `Faltam ${formatCurrency(remaining)} para desbloquear este nível!`;
+        } else {
+          const activeLevel = levels[achievedIndex];
+          const nextLevel = levels[achievedIndex + 1];
+          iconEl.textContent = activeLevel.icone || '💍';
+          stagePillEl.textContent = 'Nível Desbloqueado';
+          levelNameEl.textContent = activeLevel.nome;
+          levelDescEl.textContent = activeLevel.descricao || '';
+
+          if (nextLevel) {
+            const remaining = Math.max(0, nextLevel.valor - total);
+            nextHintEl.textContent = `Faltam ${formatCurrency(remaining)} para evoluir para: ${nextLevel.nome}`;
+          } else {
+            nextHintEl.textContent = 'Todas as metas foram desbloqueadas! Muito obrigado pelo carinho!';
+          }
+        }
+      }
+
+      // Renderizar lista de metas com criação segura de elementos
       const listContainer = document.getElementById('goals-list');
-      listContainer.innerHTML = '';
-      
-      c.niveis.forEach(lvl => {
+      listContainer.replaceChildren();
+
+      const nextTargetIndex = achievedIndex + 1;
+      levels.forEach((lvl, idx) => {
         const isAchieved = total >= lvl.valor;
-        const isCurrent = currentLevel.nome === lvl.nome;
-        
-        let statusClass = isCurrent ? 'current' : (isAchieved ? 'achieved' : 'locked');
-        let statusBadge = isCurrent ? 'Em Andamento' : (isAchieved ? '✓ Desbloqueado' : 'Bloqueado');
+        const isNext = !isAchieved && idx === nextTargetIndex;
+
+        const statusClass = isAchieved ? 'achieved' : (isNext ? 'current' : 'locked');
+        const statusBadge = isAchieved ? '✓ Desbloqueado' : (isNext ? 'Próxima Meta' : 'Bloqueado');
 
         const item = document.createElement('div');
         item.className = `goal-item ${statusClass}`;
-        item.innerHTML = `
-          <div>
-            <strong>${lvl.icone} ${lvl.nome}</strong>
-            <span style="display:block; font-size: 0.8rem; color: var(--text-muted);">${lvl.descricao}</span>
-          </div>
-          <div style="text-align: right; min-width: 110px;">
-            <div style="font-weight: 700;">R$ ${lvl.valor.toLocaleString('pt-BR')}</div>
-            <span class="goal-badge">${statusBadge}</span>
-          </div>
-        `;
+
+        const infoDiv = document.createElement('div');
+        const titleEl = document.createElement('div');
+        titleEl.className = 'goal-info-title';
+        titleEl.textContent = `${lvl.icone ? lvl.icone + ' ' : ''}${lvl.nome}`;
+
+        const descEl = document.createElement('span');
+        descEl.className = 'goal-info-desc';
+        descEl.textContent = lvl.descricao || '';
+
+        infoDiv.append(titleEl, descEl);
+
+        const metaDiv = document.createElement('div');
+        metaDiv.className = 'goal-meta';
+
+        const valueEl = document.createElement('div');
+        valueEl.className = 'goal-value';
+        valueEl.textContent = formatCurrency(lvl.valor);
+
+        const badgeEl = document.createElement('span');
+        badgeEl.className = 'goal-badge';
+        badgeEl.textContent = statusBadge;
+
+        metaDiv.append(valueEl, badgeEl);
+        item.append(infoDiv, metaDiv);
         listContainer.appendChild(item);
       });
 
-      // Apoiadores
+      // Renderizar mural de apoiadores com segurança
       const supContainer = document.getElementById('supporters-list');
-      supContainer.innerHTML = '';
-      if (c.apoiadores && c.apoiadores.length > 0) {
+      supContainer.replaceChildren();
+
+      if (Array.isArray(c.apoiadores) && c.apoiadores.length > 0) {
         c.apoiadores.forEach(sup => {
           const pill = document.createElement('div');
           pill.className = 'supporter-pill';
-          pill.innerHTML = `<span>${sup.nome}</span> ${sup.recado ? `• "${sup.recado}"` : ''}`;
+
+          const nameSpan = document.createElement('span');
+          nameSpan.className = 'supporter-name';
+          nameSpan.textContent = sup.nome || 'Apoiador(a)';
+          pill.appendChild(nameSpan);
+
+          if (sup.recado) {
+            const msgSpan = document.createElement('span');
+            msgSpan.className = 'supporter-message';
+            msgSpan.textContent = ` • "${sup.recado}"`;
+            pill.appendChild(msgSpan);
+          }
+
           supContainer.appendChild(pill);
         });
       } else {
-        supContainer.innerHTML = '<span style="color: var(--text-muted); font-size: 0.85rem;">Seja o primeiro a apoiar!</span>';
+        const emptyEl = document.createElement('span');
+        emptyEl.style.color = 'var(--ink-muted)';
+        emptyEl.style.fontSize = '0.88rem';
+        emptyEl.textContent = 'Seja o primeiro a deixar sua contribuição e mensagem de carinho!';
+        supContainer.appendChild(emptyEl);
       }
     }
 
-    function copyPix() {
-      const key = document.getElementById('pix-key').innerText;
-      navigator.clipboard.writeText(key).then(() => {
-        const feedback = document.getElementById('copy-feedback');
-        feedback.style.display = 'block';
-        setTimeout(() => feedback.style.display = 'none', 3000);
-      });
+    async function copyPix() {
+      const key = document.getElementById('pix-key').textContent.trim();
+      const feedback = document.getElementById('copy-feedback');
+
+      try {
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(key);
+        } else {
+          const tempInput = document.createElement('textarea');
+          tempInput.value = key;
+          tempInput.style.position = 'fixed';
+          tempInput.style.opacity = '0';
+          document.body.appendChild(tempInput);
+          tempInput.select();
+          document.execCommand('copy');
+          document.body.removeChild(tempInput);
+        }
+        feedback.textContent = 'Chave Pix copiada com sucesso! Obrigado pelo carinho.';
+      } catch (err) {
+        feedback.textContent = 'Não foi possível copiar automaticamente. Selecione a chave acima para copiar.';
+      }
+
+      setTimeout(() => {
+        feedback.textContent = '';
+      }, 3500);
     }
 
-    window.onload = init;
+    document.getElementById('btn-copy').addEventListener('click', copyPix);
+    window.addEventListener('DOMContentLoaded', init);
   </script>
 </body>
 </html>
