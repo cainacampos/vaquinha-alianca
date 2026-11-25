@@ -9,7 +9,7 @@ window.VAQUINHA_CONFIG = {
   // Informações da página
   titulo: "Vaquinha da Nossa Aliança 💍",
   subtitulo: "Ajude-nos a desbloquear a melhor aliança para o nosso casamento! Cada contribuição melhora a qualidade da joia.",
-  chavePix: "cainaemarilia@gmail.com",
+  chavePix: "campos.caina@gmail.com",
 
   // 👉 ALTERE AQUI CONFORME AS CONTRIBUIÇÕES CHEGAREM:
   valorArrecadado: 0,
@@ -23,19 +23,19 @@ window.VAQUINHA_CONFIG = {
       descricao: "Simples, bonita e simbólica para selar o nosso amor."
     },
     {
-      valor: 1200,
+      valor: 1000,
       icone: "✨💍",
       nome: "Aliança de Ouro 10k Anatômica",
       descricao: "Mais resistente, confortável no dedo e já tem o brilho do ouro!"
     },
     {
-      valor: 2500,
+      valor: 1500,
       icone: "🌟💍✨",
       nome: "Aliança Ouro 18k Tradicional",
       descricao: "O clássico ouro maciço 18k que dura a vida inteira sem perder o brilho."
     },
     {
-      valor: 5000,
+      valor: 2000,
       icone: "👑💎💍",
       nome: "Aliança Premium 18k com Brilhante/Diamante",
       descricao: "A versão dos sonhos! Ouro 18k reforçado com pedra de diamante cravada."
@@ -44,6 +44,6 @@ window.VAQUINHA_CONFIG = {
 
   // Lista de quem já ajudou (opcional, adicione novos conforme quiser)
   apoiadores: [
-    { nome: "Tio Carlos", recado: "Felicidades ao casal!" },
+    { nome: "", recado: "" },
   ]
 };
