@@ -12,7 +12,7 @@ window.VAQUINHA_CONFIG = {
   chavePix: "campos.caina@gmail.com",
 
   // 👉 ALTERE AQUI CONFORME AS CONTRIBUIÇÕES CHEGAREM:
-  valorArrecadado: 50,00
+  valorArrecadado: 50,
 
   // Níveis de evolução da aliança (estilo stretch goals do Catarse)
   niveis: [
