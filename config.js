@@ -12,7 +12,7 @@ window.VAQUINHA_CONFIG = {
   chavePix: "campos.caina@gmail.com",
 
   // 👉 ALTERE AQUI CONFORME AS CONTRIBUIÇÕES CHEGAREM:
-  valorArrecadado: 0,
+  valorArrecadado: 50,00
 
   // Níveis de evolução da aliança (estilo stretch goals do Catarse)
   niveis: [
@@ -44,6 +44,6 @@ window.VAQUINHA_CONFIG = {
 
   // Lista de quem já ajudou (opcional, adicione novos conforme quiser)
   apoiadores: [
-    { nome: "", recado: "" },
+    { nome: "Fernando Lyra", recado: "Muitas felicidades para o casal!🥰🥰🥰" },
   ]
 };
